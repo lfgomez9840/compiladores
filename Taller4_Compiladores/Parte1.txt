@@ -1,0 +1,41 @@
+Parte 1: Análisis y Árbol Sintáctico
+Gramática dada:
+
+S → id = E
+E → E + T | E - T | T
+T → T * F | T / F | F
+F → (E) | id | num
+Expresión:
+z = a * (b + c) - d
+
+Construcción del árbol sintáctico:
+
+                S
+               / \
+            id   E
+           (z)   |
+                 -
+                / \
+               E   T
+              /     \
+             T       F
+            / \      |
+           F   *    (E)
+           |   |     |
+          id   F     +
+         (a)  |     / \
+              (b)  F   T
+                   |   |
+                  id  id
+                 (c) (d)
+Explicación paso a paso:
+
+S → id = E → z = E
+E → E - T
+E → T * F
+T → F (a)
+F → (E) (b + c)
+E → E + T
+E → F (b)
+T → F (c)
+T → F (d)

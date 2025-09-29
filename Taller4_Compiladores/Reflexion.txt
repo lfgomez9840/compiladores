@@ -1,0 +1,8 @@
+Parte 3: Reflexión
+1. ¿Por qué es importante el uso de gramáticas libres de contexto en la construcción de compiladores?
+
+Las gramáticas libres de contexto (GLC) permiten definir de manera formal la estructura de los lenguajes de programación. Son esenciales porque facilitan la creación de analizadores sintácticos (parsers) que pueden verificar si una secuencia de símbolos (código fuente) es válida y cómo debe interpretarse. Sin GLC, sería muy difícil construir compiladores robustos y confiables.
+
+2. ¿Cómo ayuda un árbol sintáctico en el proceso de compilación?
+
+El árbol sintáctico (o árbol de derivación) representa la estructura jerárquica del código fuente. Permite al compilador entender la precedencia de operadores, la agrupación de expresiones y la relación entre los diferentes elementos del programa. Es fundamental para las siguientes fases del compilador, como la generación de código intermedio, optimización y traducción a código máquina.
