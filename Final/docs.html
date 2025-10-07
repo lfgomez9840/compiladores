@@ -1,0 +1,103 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Documentación | Mini Compilador</title>
+  <link rel="stylesheet" href="assets/styles.css" />
+  <style>
+    /* Ajustes sutiles para lectura en docs */
+    .docs {
+      max-width: 900px;
+      margin: 0 auto;
+      padding: 24px;
+      background: rgba(0,0,0,0.25);
+      border: 1px solid var(--stroke);
+      border-radius: 14px;
+    }
+    .docs h2, .docs h3 { margin-top: 22px; }
+    .docs code { font-family: var(--mono); background: rgba(255,255,255,0.06); padding: 2px 6px; border-radius: 6px; }
+    .docs pre { background: rgba(0,0,0,0.35); padding: 12px; border-radius: 10px; overflow: auto; }
+    .docs .note { color: var(--muted); }
+    .back { display:inline-block; margin-bottom: 12px; }
+  </style>
+</head>
+<body>
+  <div class="page">
+    <header class="header">
+      <a class="btn btn-secondary back" href="index.html">← Volver</a>
+      <h1>Documentación</h1>
+      <p class="subtitle">Guía de uso, gramática, ejemplos y fases del compilador</p>
+    </header>
+
+    <main class="container">
+      <section class="docs glass">
+        <h2>1. Uso rápido</h2>
+        <ol>
+          <li>Escribe una línea de código en la caja de texto (p. ej. <code>num = 4</code>).</li>
+          <li>Haz clic en <strong>Compilar</strong> o presiona <strong>Enter</strong> (Ctrl/Cmd+Enter acelera).</li>
+          <li>Observa las salidas de análisis Léxico, Sintáctico, Semántico y la Validación.</li>
+        </ol>
+
+        <h2>2. Gramática soportada</h2>
+        <pre><code>stmt   -> IDENT "=" expr
+expr   -> term (("+"|"-") term)*
+term   -> factor (("*"|"/") factor)*
+factor -> NUMBER | IDENT | "(" expr ")"
+</code></pre>
+        <p class="note">IDENT: comienza con letra o "_" y puede contener letras, dígitos o "_". NUMBER: enteros o decimales.</p>
+
+        <h2>3. Reglas semánticas</h2>
+        <ul>
+          <li>El RHS de una asignación debe evaluar a tipo <code>number</code>.</li>
+          <li>Las variables usadas deben haberse asignado antes (o en esta misma ejecución si mantienes el estado).</li>
+          <li>Operadores <code>+ - * /</code> solo entre números.</li>
+        </ul>
+
+        <h2>4. Ejemplos</h2>
+        <ul>
+          <li><code>num = 4</code> ✓ válido</li>
+          <li><code>x = 2 + 3*5</code> ✓ válido</li>
+          <li><code>y = (x + 1) * 2</code> ✗ error si <code>x</code> no está declarado previamente</li>
+          <li><code>3 = 4</code> ✗ error sintáctico (izquierda debe ser IDENT)</li>
+        </ul>
+
+        <h2>5. Fases del análisis</h2>
+        <h3>5.1 Léxico</h3>
+        <p>Convierte la cadena en tokens: <code>IDENT</code>, <code>NUMBER</code>, <code>OP</code>, <code>EQUAL</code>, <code>LPAREN</code>, <code>RPAREN</code>. Señala caracteres no reconocidos.</p>
+        <h3>5.2 Sintáctico</h3>
+        <p>Construye un AST según la gramática. Reporta <em>tokens sobrantes</em>, <em>expresión incompleta</em>, etc.</p>
+        <h3>5.3 Semántico</h3>
+        <p>Verifica tipos y uso de identificadores. Reporta variables no declaradas u operaciones inválidas.</p>
+
+        <h2>6. Atajos y tips</h2>
+        <ul>
+          <li><strong>Enter</strong> compila; <strong>Ctrl/Cmd+Enter</strong> compila desde cualquier parte del input.</li>
+          <li>Los tokens aparecen como chips animados; el árbol se actualiza con transición.</li>
+          <li>Si quieres conservar variables entre compilaciones, quita <code>resetSymbols()</code> de <code>app.js</code>.</li>
+        </ul>
+
+        <h2>7. Estructura del proyecto</h2>
+        <pre><code>index.html
+docs.html
+assets/
+  styles.css
+  app.js
+  lexer.js
+  parser.js
+  semantics.js
+  ui.js
+  images/
+    bg-code-1.jpg
+    bg-code-2.jpg
+    bg-diagram.png
+</code></pre>
+      </section>
+    </main>
+
+    <footer class="footer">
+      <small>Proyecto académico — Mini Compilador</small>
+    </footer>
+  </div>
+</body>
+</html>
