@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Mini Compilador - Proyecto Final</title>
+  <link rel="stylesheet" href="assets/styles.css" />
+</head>
+<body>
+  <div class="page">
+    <header class="header">
+      <h1>Mini Compilador</h1>
+      <p class="subtitle">Línea única: asignaciones y expresiones aritméticas</p>
+      <p class="examples">
+        Ejemplos: <code>num = 4</code>, <code>x = 2 + 3*5</code>, <code>y = (x + 1) * 2</code>
+      </p>
+    </header>
+
+    <main class="container">
+      <section class="input-card glass">
+        <label for="code">Línea de código</label>
+        <div class="input-row">
+          <input id="code" type="text" placeholder="num = 4" aria-label="Línea de código"/>
+          <button id="compileBtn" class="btn">Compilar</button>
+        </div>
+      </section>
+
+      <section class="grid">
+        <div class="panel glass">
+          <h3>Análisis léxico (tokens)</h3>
+          <div id="lexOut" class="tokens" role="region" aria-live="polite"></div>
+        </div>
+        <div class="panel glass">
+          <h3>Análisis sintáctico (árbol)</h3>
+          <div id="parseOut" class="tree" role="region" aria-live="polite"></div>
+        </div>
+        <div class="panel glass">
+          <h3>Análisis semántico</h3>
+          <div id="semOut" role="region" aria-live="polite"></div>
+        </div>
+        <div class="panel glass">
+          <h3>Validación</h3>
+          <div id="valOut" role="region" aria-live="polite"></div>
+        </div>
+      </section>
+    </main>
+
+    <footer class="footer">
+      <small>Proyecto académico — análisis léxico, sintáctico y semántico</small>
+    </footer>
+  </div>
+
+  <!-- Solo el entrypoint como módulo -->
+  <script type="module" src="assets/app.js"></script>
+</body>
+</html>
